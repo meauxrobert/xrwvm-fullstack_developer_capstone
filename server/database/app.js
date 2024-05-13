@@ -58,52 +58,50 @@ app.get('/fetchReviews/dealer/:id', async (req, res) => {
 
 // Express route to fetch all dealerships
 app.get('/fetchDealers', async (req, res) => {
-    try {
-        const dealers = await Dealerships.find();
-        res.json(dealers);
-    } catch (error) {
-        res.status(500).json({ error: 'Error fetching documents' });
-    }
+  try {
+    const documents = await Dealerships.find();
+    res.json(documents);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching documents' });
+  }
 });
 
 // Express route to fetch Dealers by a particular state
 app.get('/fetchDealers/:state', async (req, res) => {
-    try {
-        const dealers = await Dealerships.find({ state: req.params.state });
-        res.json(dealers);
-    } catch (err) {
-         res.status(500).json({ error: 'Error fetching documents' });
-     }
-    });
+  try {
+    const documents = await Dealerships.find({state: req.params.state});
+    res.json(documents);
+  } catch (err) {
+    res.status(500).json({ error: err});
+  }
+});
 
 // Express route to fetch dealer by a particular id
 app.get('/fetchDealer/:id', async (req, res) => {
-    const idreq = req.params.id;
-    try {
-        //const documents = await Dealerships.find({id: idreq});
-        const documents = await Dealerships.find({dealership: req.params.id});
-        res.json(documents);
-    } catch (error) {
-      res.status(500).json({ error: 'Error fetching dealer by id' }); // Handle any errors and send an appropriate response
-    }
-  });
+try {
+    const documents = await Dealerships.find({id: req.params.id});
+    res.json(documents);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching documents' });
+  }
+});
 
 //Express route to insert review
 app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
   data = JSON.parse(req.body);
-  const documents = await Reviews.find().sort( { id: -1 } )
-  let new_id = documents[0]['id']+1
+  const documents = await Reviews.find().sort( { id: -1 } );
+  let new_id = documents[0].id+1;
 
   const review = new Reviews({
 		"id": new_id,
-		"name": data['name'],
-		"dealership": data['dealership'],
-		"review": data['review'],
-		"purchase": data['purchase'],
-		"purchase_date": data['purchase_date'],
-		"car_make": data['car_make'],
-		"car_model": data['car_model'],
-		"car_year": data['car_year'],
+		"name": data.name,
+		"dealership": data.dealership,
+		"review": data.review,
+		"purchase": data.purchase,
+		"purchase_date": data.purchase_date,
+		"car_make": data.car_make,
+		"car_model": data.car_model,
+		"car_year": data.car_year,
 	});
 
   try {
