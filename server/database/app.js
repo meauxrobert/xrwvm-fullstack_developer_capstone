@@ -80,7 +80,8 @@ app.get('/fetchDealers/:state', async (req, res) => {
 app.get('/fetchDealer/:id', async (req, res) => {
     const idreq = req.params.id;
     try {
-        const documents = await Dealerships.find({id: idreq});
+        //const documents = await Dealerships.find({id: idreq});
+        const documents = await Dealerships.find({dealership: req.params.id});
         res.json(documents);
     } catch (error) {
       res.status(500).json({ error: 'Error fetching dealer by id' }); // Handle any errors and send an appropriate response
