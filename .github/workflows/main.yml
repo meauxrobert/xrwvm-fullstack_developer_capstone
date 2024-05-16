@@ -3,21 +3,21 @@ name: 'Lint Code'
 on:
   push:
     branches: [master, main]
-  pull_request:
+  pull_request: 
     branches: [master, main]
     
 jobs:
-  lint_python:
+  lint_python: 
     name: Lint Python Files
     runs-on: ubuntu-latest
     
-    steps:
+    steps: 
     - name: Checkout Repository
       uses: actions/checkout@v3
     
     - name: Set up Python
       uses: actions/setup-python@v4
-      with:
+      with: 
         python-version: 3.12
         
     - name: Install dependencies
@@ -39,7 +39,7 @@ jobs:
       name: Lint JavaScript Files
       runs-on: ubuntu-latest
       
-      steps:
+      steps: 
       - name: Checkout Repository
         uses: actions/checkout@v3
         
